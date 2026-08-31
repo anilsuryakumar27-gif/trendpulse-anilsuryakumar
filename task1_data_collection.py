@@ -80,7 +80,7 @@ filename = f"data/trends_{today_str}.json"
 
 os.makedirs("data", exist_ok=True)
 
-# Save our list of dictionaries into the JSON file
+
 with open(filename, "w") as file:
     json.dump(collected_stories, file, indent=4)
 
