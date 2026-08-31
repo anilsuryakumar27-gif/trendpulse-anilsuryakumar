@@ -3,43 +3,43 @@ import matplotlib.pyplot as plt
 import os
 
 # --- 1. Setup (2 marks) ---
-# Create the 'outputs' folder if it doesn't exist
+
 os.makedirs("outputs", exist_ok=True)
 
-# Load the analyzed CSV from Task 3
+
 input_file = "data/trends_analysed.csv"
 df = pd.read_csv(input_file)
 
 
-# --- 2. Chart 1: Top 10 Stories by Score (6 marks) ---
+# --- 2. Chart 1: Top 10 Stories by Score (6 marks)
 plt.figure(figsize=(10, 6))
 
-# Sort to get the top 10 highest-scoring stories
+
 top_10 = df.nlargest(10, 'score')
 
-# Shorten titles longer than 50 characters so they fit nicely
+
 titles = top_10['title'].apply(lambda x: x[:50] + '...' if len(str(x)) > 50 else x)
 scores = top_10['score']
 
-# Create horizontal bar chart
+
 plt.barh(titles, scores, color='skyblue')
 plt.xlabel('Score')
 plt.title('Top 10 Stories by Score')
-plt.gca().invert_yaxis() # Put the highest score at the top
+plt.gca().invert_yaxis() 
 plt.tight_layout()
 
-# Save chart 1
+
 plt.savefig("outputs/chart1_top_stories.png")
 plt.close()
 
 
-# --- 3. Chart 2: Stories per Category (6 marks) ---
+# --- 3. Chart 2: Stories per Category (6 marks)
 plt.figure(figsize=(8, 5))
 
-# Count stories per category
+
 category_counts = df['category'].value_counts()
 
-# Create vertical bar chart with different colors
+
 category_counts.plot(kind='bar', color=['coral', 'mediumseagreen', 'orchid', 'gold', 'cornflowerblue', 'tomato'])
 plt.xlabel('Category')
 plt.ylabel('Number of Stories')
@@ -47,15 +47,15 @@ plt.title('Stories per Category')
 plt.xticks(rotation=45)
 plt.tight_layout()
 
-# Save chart 2
+
 plt.savefig("outputs/chart2_categories.png")
 plt.close()
 
 
-# --- 4. Chart 3: Score vs Comments Scatter Plot (6 marks) ---
+# --- 4. Chart 3: Score vs Comments Scatter Plot (6 marks) 
 plt.figure(figsize=(8, 5))
 
-# Separate popular vs non-popular stories for different colors
+
 popular = df[df['is_popular'] == True]
 non_popular = df[df['is_popular'] == False]
 
@@ -68,13 +68,13 @@ plt.title('Score vs Comments')
 plt.legend()
 plt.tight_layout()
 
-# Save chart 3
+
 plt.savefig("outputs/chart3_scatter.png")
 plt.close()
 
 
-# --- BONUS: Dashboard (+3 marks) ---
-# Combine all 3 charts into a single multi-panel figure
+# --- BONUS: Dashboard (+3 marks)
+
 fig, axes = plt.subplots(1, 3, figsize=(18, 5))
 fig.suptitle('TrendPulse Dashboard', fontsize=16)
 
@@ -96,7 +96,7 @@ axes[2].legend()
 
 plt.tight_layout()
 
-# Save dashboard
+
 plt.savefig("outputs/dashboard.png")
 plt.close()
 
